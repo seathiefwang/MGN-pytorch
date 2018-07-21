@@ -1,4 +1,5 @@
 # Multiple Granularity Network
+Reproduction of paper:[Learning Discriminative Features with Multiple Granularities for Person Re-Identification](https://arxiv.org/abs/1804.01438v1)
 
 ```text
 @ARTICLE{2018arXiv180401438W,

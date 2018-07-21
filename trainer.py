@@ -60,10 +60,10 @@ class Trainer():
 
     def test(self):
         epoch = self.scheduler.last_epoch + 1
-        self.ckpt.write_log('\n[INFO] Evaluation:')
-        self.ckpt.add_log(torch.zeros(1, 5))
+        self.ckpt.write_log('\n[INFO] Test:')
         self.model.eval()
 
+        self.ckpt.add_log(torch.zeros(1, 5))
         qf = self.extract_feature(self.query_loader).numpy()
         gf = self.extract_feature(self.test_loader).numpy()
 
@@ -91,12 +91,12 @@ class Trainer():
             m_ap,
             r[0], r[2], r[4], r[9],
             best[0][0],
-            best[1][0] + 1
+            (best[1][0] + 1)*self.args.test_every
             )
         )
         if not self.args.test_only:
-            self.ckpt.save(self, epoch, is_best=(best[1][0] + 1 == epoch))
-        
+            self.ckpt.save(self, epoch, is_best=((best[1][0] + 1)*self.args.test_every == epoch))
+
     def fliphor(self, inputs):
         inv_idx = torch.arange(inputs.size(3)-1,-1,-1).long()  # N x C x H x W
         return inputs.index_select(3,inv_idx)

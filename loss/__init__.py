@@ -1,4 +1,5 @@
 import os
+import numpy as np
 from importlib import import_module
 
 import matplotlib

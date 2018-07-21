@@ -75,16 +75,13 @@ class checkpoint():
         self.log_file.close()
 
     def plot_map_rank(self, epoch):
-        axis = np.linspace(1, epoch, epoch)
+        axis = np.linspace(1, epoch, self.log.size(0))
         label = 'Reid on {}'.format(self.args.data_test)
+        labels = ['mAP','rank1','rank3','rank5','rank10']
         fig = plt.figure()
         plt.title(label)
-
-        plt.plot(axis, self.log[:, 0].numpy(), label='mAP')
-        plt.plot(axis, self.log[:, 1].numpy(), label='rank1')
-        plt.plot(axis, self.log[:, 2].numpy(), label='rank3')
-        plt.plot(axis, self.log[:, 3].numpy(), label='rank5')
-        plt.plot(axis, self.log[:, 4].numpy(), label='rank10')
+        for i in range(len(labels)):
+            plt.plot(axis, self.log[:, i].numpy(), label=labels[i])
 
         plt.legend()
         plt.xlabel('Epochs')
@@ -96,22 +93,35 @@ class checkpoint():
     def save_results(self, filename, save_list, scale):
         pass
 
-
 def make_optimizer(args, model):
     trainable = filter(lambda x: x.requires_grad, model.parameters())
 
     if args.optimizer == 'SGD':
         optimizer_function = optim.SGD
-        kwargs = {'momentum': args.momentum}
+        kwargs = {
+            'momentum': args.momentum,
+            'dampening': args.dampening,
+            'nesterov': args.nesterov
+            }
     elif args.optimizer == 'ADAM':
         optimizer_function = optim.Adam
+        kwargs = {
+            'betas': (args.beta1, args.beta2),
+            'eps': args.epsilon,
+            'amsgrad': args.amsgrad
+        }
+    elif args.optimizer == 'ADAMAX':
+        optimizer_function = optim.Adamax
         kwargs = {
             'betas': (args.beta1, args.beta2),
             'eps': args.epsilon
         }
     elif args.optimizer == 'RMSprop':
         optimizer_function = optim.RMSprop
-        kwargs = {'eps': args.epsilon}
+        kwargs = {
+            'eps': args.epsilon,
+            'momentum': args.momentum
+        }
     else:
         raise Exception()
 
