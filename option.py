@@ -34,6 +34,7 @@ parser.add_argument('--optimizer', default='ADAM', choices=('SGD','ADAM','ADAMAX
 parser.add_argument('--momentum', type=float, default=0.9, help='SGD momentum')
 parser.add_argument('--dampening', type=float, default=0, help='SGD dampening')
 parser.add_argument('--nesterov', action='store_true', help='SGD nesterov')
+
 parser.add_argument('--beta1', type=float, default=0.9, help='ADAM beta1')
 parser.add_argument('--beta2', type=float, default=0.999, help='ADAM beta2')
 parser.add_argument('--amsgrad', action='store_true', help='ADAM amsgrad')
@@ -42,7 +43,6 @@ parser.add_argument('--gamma', type=float, default=0.1, help='learning rate deca
 parser.add_argument('--weight_decay', type=float, default=5e-4, help='weight decay')
 parser.add_argument('--decay_type', type=str, default='step', help='learning rate decay type')
 parser.add_argument('--lr_decay', type=int, default=60, help='learning rate decay per N epochs')
-
 
 parser.add_argument("--margin", type=float, default=1.2, help='')
 parser.add_argument("--re_rank", action='store_true', help='')

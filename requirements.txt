@@ -1,0 +1,9 @@
+torchvision
+matplotlib
+argparse
+sklearn
+pytorch
+pillow
+numpy
+scipy
+tqdm
