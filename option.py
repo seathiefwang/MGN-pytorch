@@ -34,7 +34,6 @@ parser.add_argument('--optimizer', default='ADAM', choices=('SGD','ADAM','ADAMAX
 parser.add_argument('--momentum', type=float, default=0.9, help='SGD momentum')
 parser.add_argument('--dampening', type=float, default=0, help='SGD dampening')
 parser.add_argument('--nesterov', action='store_true', help='SGD nesterov')
-
 parser.add_argument('--beta1', type=float, default=0.9, help='ADAM beta1')
 parser.add_argument('--beta2', type=float, default=0.999, help='ADAM beta2')
 parser.add_argument('--amsgrad', action='store_true', help='ADAM amsgrad')
@@ -51,11 +50,11 @@ parser.add_argument("--probability", type=float, default=0.5, help='')
 
 parser.add_argument("--savedir", type=str, default='saved_models', help='directory name to save')
 parser.add_argument("--outdir", type=str, default='out', help='')
-parser.add_argument("--resume", type=str, default='', help='resume from specific checkpoint')
+parser.add_argument("--resume", type=int, default=0, help='resume from specific checkpoint')
 parser.add_argument('--save', type=str, default='test', help='file name to save')
 parser.add_argument('--load', type=str, default='', help='file name to load')
 parser.add_argument('--save_models', action='store_true', help='save all intermediate models')
-
+parser.add_argument('--pre_train', type=str, default='', help='pre-trained model directory')
 
 args = parser.parse_args()
 

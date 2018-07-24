@@ -47,12 +47,11 @@ class Loss(nn.modules.loss._Loss):
         device = torch.device('cpu' if args.cpu else 'cuda')
         self.loss_module.to(device)
         
+        if args.load != '': self.load(ckpt.dir, cpu=args.cpu)
         if not args.cpu and args.nGPU > 1:
             self.loss_module = nn.DataParallel(
                 self.loss_module, range(args.nGPU)
             )
-
-        if args.load != '': self.load(ckpt.dir, cpu=args.cpu)
 
     def forward(self, outputs, labels):
         losses = []

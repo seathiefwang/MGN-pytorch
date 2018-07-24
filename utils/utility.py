@@ -27,7 +27,7 @@ class checkpoint():
                 args.load = ''
             else:
                 self.log = torch.load(self.dir + '/map_log.pt')
-                print('Continue from epoch {}...'.format(len(self.log)))
+                print('Continue from epoch {}...'.format(len(self.log)*args.test_every))
 
         if args.reset:
             os.system('rm -rf ' + self.dir)

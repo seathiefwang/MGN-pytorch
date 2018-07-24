@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 
 class Model(nn.Module):
-    def __init__(self, args):
+    def __init__(self, args, ckpt):
         super(Model, self).__init__()
         print('[INFO] Making model...')
 
@@ -18,6 +18,14 @@ class Model(nn.Module):
 
         if not args.cpu and args.nGPU > 1:
             self.model = nn.DataParallel(self.model, range(args.nGPU))
+
+        self.load(
+            ckpt.dir,
+            pre_train=args.pre_train,
+            resume=args.resume,
+            cpu=args.cpu
+        )
+        print(self.model, file=ckp.log_file)
 
 
     def forward(self, x):
@@ -47,7 +55,7 @@ class Model(nn.Module):
                 os.path.join(apath, 'model', 'model_{}.pt'.format(epoch))
             )
 
-    def load(self, apath, pre_train='.', resume=-1, cpu=False):
+    def load(self, apath, pre_train='', resume=-1, cpu=False):
         if cpu:
             kwargs = {'map_location': lambda storage, loc: storage}
         else:
@@ -62,7 +70,7 @@ class Model(nn.Module):
                 strict=False
             )
         elif resume == 0:
-            if pre_train != '.':
+            if pre_train != '':
                 print('Loading model from {}'.format(pre_train))
                 self.get_model().load_state_dict(
                     torch.load(pre_train, **kwargs),

@@ -28,10 +28,10 @@ run `sh demo.sh`
 
 ##  Result
 
-| time | mAP | rank1 | rank3 | rank5 | rank10 |
+|  | mAP | rank1 | rank3 | rank5 | rank10 |
 | :------: | :------: | :------: | :------: | :------: | :------: |
 | 2018-7-22 | 0.9217 | 0.9460 | 0.9653 | 0.9706 | 0.9801 |
-| training | ... | ... | ... | ... | ... |
+| 2018-7-24 | 0.9353 | 0.9534 | 0.9706 | 0.9768 | 0.9849 |
 
 ## The architecture of Multiple Granularity Network (MGN)
 ![Multiple Granularity Network](https://pic2.zhimg.com/80/v2-90a8763a0b7aa86d9152492eb3f85899_hd.jpg)

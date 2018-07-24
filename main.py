@@ -10,7 +10,7 @@ import utils.utility as utility
 ckpt = utility.checkpoint(args)
 
 loader = data.Data(args)
-model = model.Model(args)
+model = model.Model(args, ckpt)
 loss = loss.Loss(args, ckpt) if not args.test_only else None
 trainer = Trainer(args, model, loss, loader, ckpt)
 

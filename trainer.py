@@ -25,9 +25,9 @@ class Trainer():
 
         if args.load != '':
             self.optimizer.load_state_dict(
-                torch.load(os.path.join(ckpt.dir, 'optimizer.pth'))
+                torch.load(os.path.join(ckpt.dir, 'optimizer.pt'))
             )
-            for _ in range(len(ckpt.log)): self.scheduler.step()
+            for _ in range(len(ckpt.log)*args.test_every): self.scheduler.step()
 
     def train(self):
         self.scheduler.step()
