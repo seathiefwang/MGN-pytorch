@@ -25,8 +25,6 @@ class Model(nn.Module):
             resume=args.resume,
             cpu=args.cpu
         )
-        print(self.model, file=ckp.log_file)
-
 
     def forward(self, x):
         return self.model(x)
