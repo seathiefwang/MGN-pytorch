@@ -10,6 +10,8 @@ import scipy.misc as misc
 
 import torch
 import torch.optim as optim
+from utils.nadam import Nadam
+from utils.n_adam import NAdam
 import torch.optim.lr_scheduler as lrs
 
 class checkpoint():
@@ -110,8 +112,8 @@ def make_optimizer(args, model):
             'eps': args.epsilon,
             'amsgrad': args.amsgrad
         }
-    elif args.optimizer == 'ADAMAX':
-        optimizer_function = optim.Adamax
+    elif args.optimizer == 'NADAM':
+        optimizer_function = NAdam
         kwargs = {
             'betas': (args.beta1, args.beta2),
             'eps': args.epsilon

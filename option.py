@@ -30,7 +30,7 @@ parser.add_argument('--num_classes', type=int, default=751, help='')
 
 
 parser.add_argument("--lr", type=float, default=2e-4, help='learning rate')
-parser.add_argument('--optimizer', default='ADAM', choices=('SGD','ADAM','ADAMAX','RMSprop'), help='optimizer to use (SGD | ADAM | ADAMAX | RMSprop)')
+parser.add_argument('--optimizer', default='ADAM', choices=('SGD','ADAM','NADAM','RMSprop'), help='optimizer to use (SGD | ADAM | NADAM | RMSprop)')
 parser.add_argument('--momentum', type=float, default=0.9, help='SGD momentum')
 parser.add_argument('--dampening', type=float, default=0, help='SGD dampening')
 parser.add_argument('--nesterov', action='store_true', help='SGD nesterov')
